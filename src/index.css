@@ -63,3 +63,19 @@ main form button{
 .post-set p{
     margin-bottom: 10px;
 }
+
+.textarea{
+    margin-top: 20px;
+    border: 2px solid greenyellow;
+    padding: 10px;
+    border-radius: 20px;
+    background-color: white;
+}
+
+.remove{
+    border: 2px solid greenyellow;
+    padding: 10px;
+    border-radius: 20px;
+    background-color: white;
+    cursor: pointer;
+}

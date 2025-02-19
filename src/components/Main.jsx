@@ -29,9 +29,11 @@ export default function Main() {
     // QUesta funzione serve a salvare i dati che l utente inserisce nel form e aggiornarli nello stato formData
     function handleFormData(e) {
 
-        // uso setFormData cosi aggiorna
+        // uso setFormData cosi vado ad aggiornare currentFormData
         setFormData((currentFormData) => ({
+            // faccio copia di formData con ...spread
             ...currentFormData,
+            //Prende il nome dell input che l utente sta modificando --- invece value prende il valore inserito nell input
             [e.target.name]: e.target.value,
             
         }))
@@ -44,6 +46,29 @@ export default function Main() {
 
 
     // 4 Ora andiamo a gestire l invio del form con onSubmit
+    function addList(e) {
+        // all invio non resetta la pagina
+        e.preventDefault();
+
+        // Ora andiamo ad aggiornare lo stato di list con setList-- poi facciamo la copia di list con il parametro currentList ---- Poi aggiungiamo un ogetto prende l'ultimo elemento dell'array, legge l'id, e lo incrementa di +1------- ...formData: aggiunge i dati inseriti dall'utente.
+        setlist((currentList) => [...currentList,{ id: currentList[currentList.length - 1].id + 1, ...formData }])
+
+        // reset del form all invio
+        setFormData(initialFormData);
+    }
+
+
+
+    // 5 Ora andiamo a gestire la cancellazione di una lista attraverso ID
+    function deleteList(idList){
+        // creo nuovo array dove all interno faccio filter di list e vado a ricavarmi l elemento iesimo e faccio return di una condizione dicendo che Se l'ID dell'elemento attuale è diverso dall'ID da eliminare, allora lo tengo nella nuova lista.
+        const updateLists = list.filter((list) =>{
+            return list.id !== idList
+        })
+
+        // aggiornami la set list con updateList 
+        setlist(updateLists)
+    }
 
     return (
         <>
@@ -51,7 +76,7 @@ export default function Main() {
                 <div>
 
                     {/* FORM PER UTENTE*/}
-                    <form >
+                    <form onSubmit={addList}>
 
                         <input
                             type="text"
@@ -69,13 +94,13 @@ export default function Main() {
                             placeholder="Inserisci Autore"
                         />
 
-                        <input
-                            type="text"
+                        <textarea className="textarea"
+                            
                             name="contenuto"
                             onChange={handleFormData}
                             value={formData.contenuto}
                             placeholder="Inserisci Contenuto"
-                        />
+                        ></textarea>
 
                         <input
                             type="text"
@@ -102,6 +127,7 @@ export default function Main() {
 
                             <h3>Categoria</h3>
                             <p>{post.categoria}</p>
+                            <button className="remove" onClick={() => deleteList(post.id)}>RIMUOVI</button>
                         </section>
                     )}
                 </div>
