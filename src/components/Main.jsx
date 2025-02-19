@@ -52,6 +52,10 @@ export default function Main() {
 
         // Ora andiamo ad aggiornare lo stato di list con setList-- poi facciamo la copia di list con il parametro currentList ---- Poi aggiungiamo un ogetto prende l'ultimo elemento dell'array, legge l'id, e lo incrementa di +1------- ...formData: aggiunge i dati inseriti dall'utente.
         setlist((currentList) => [...currentList,{ id: currentList[currentList.length - 1].id + 1, ...formData }])
+        
+        // RIVEDERE SE CANCELLIAMO TUTTE LE LISTE NON CI FA AGGIUNGERE ALTRE----               
+        //  currentMenu.length === 0 ? 1 : currentMenu[currentMenu.length - 1].id + 1,
+
 
         // reset del form all invio
         setFormData(initialFormData);
