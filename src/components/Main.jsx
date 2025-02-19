@@ -1,9 +1,15 @@
 // Importo usesState
 import { useState } from "react";
+
 // Importo array di oggetti
 import postList from "../data/arrayList"
 
 export default function Main() {
+    // Ora vado a utilizzare lo useState peche mi permette di prendere l array di oggetti e catturarne l evento.
+    const [list, setlist] = useState(postList)
+    // -- list e l array di oggetti e setlist vado ad aggiornare quello array di ogetti
+
+
     return (
         <>
             <main>
@@ -13,7 +19,7 @@ export default function Main() {
                 
                 {/* post card  with map*/}
                 <div>
-                    {postList.map((post) =>
+                    {list.map((post) =>
                         <section className="post-set" key={post.id} >
                             <h2>{post.titolo}</h2>
 
@@ -28,7 +34,7 @@ export default function Main() {
                         </section>
                     )}
                 </div>
-                
+
             </main>
 
         </>
